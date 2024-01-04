@@ -40,7 +40,7 @@ function setMole() {
     mole.src = "./montyMole.png";
 
     let num = getRandomTile();
-    if(currPlantTile && currPlantTile.id == num) {
+    if (currPlantTile && currPlantTile.id == num) {
         return;
     }
     currMoleTile = document.getElementById(num);
@@ -60,11 +60,11 @@ function setPlant() {
         currPlantTile.innerHTML = "";
     }
 
-    let plant =  document.createElement("img");
+    let plant = document.createElement("img");
     plant.src = "./piranhaPlant.png";
 
     let num = getRandomTile();
-    if(currMoleTile && currMoleTile.id == num) {
+    if (currMoleTile && currMoleTile.id == num) {
         return;
     }
     currPlantTile = document.getElementById(num);
@@ -72,20 +72,20 @@ function setPlant() {
 
     plant.style.position = "relative";
     plant.style.top = "-72px";
+}
+
+function selectTile() {
+
+    if (gameOver) {
+        return;
     }
 
-    function selectTile() {
-
-        if (gameOver) {
-            return;
-        }
-
-        if (this == currMoleTile) {
-            score += 10;
-            document.getElementById("score").innerText = score.toString();
-        }
-        else if (this == currPlantTile) {
-            document.getElementById("score").innerText = "GAME OVER:" + score.toString();
-            gameOver = true;
-        }
+    if (this == currMoleTile) {
+        score += 10;
+        document.getElementById("score").innerText = score.toString();
     }
+    else if (this == currPlantTile) {
+        document.getElementById("score").innerText = "GAME OVER:" + score.toString();
+        gameOver = true;
+    }
+}
