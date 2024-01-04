@@ -3,19 +3,36 @@ body {
     text-align: center;
     background: url("./mario3\ \(1\).jpg");
     background-size: cover;
-    }
+}
 
-    #board {
-        width: 540px;
-        height: 540px;
-        /* background-color: green; */
+#board {
+    width: 540px;
+    height: 540px;
 
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
 
-        background: url("./soil\ pic.jpg");
-        background-size: cover;
-        border: 3px solid white;
-        border-radius: 25px;
-    }
+    background: url("./soil\ pic.jpg");
+    background-size: cover;
+    border: 3px solid white;
+    border-radius: 25px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+#board div {
+    width: 90px;
+    height: 90px;
+    background-image: url("./greenTube.png");
+    background-size: cover;
+    display: block;
+
+}
+
+#board div img {
+    width: 80px;
+    height: 80px;
+}
