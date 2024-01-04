@@ -1,5 +1,7 @@
 let currMoleTile;
 let currPlantTile;
+let score = 0;
+let gameOver = false;
 
 window.onload = function () {
     setGame();
@@ -11,10 +13,12 @@ function setGame() {
 
         let tile = document.createElement("div");
         tile.id = i.toString();
+        tile.addEventListener("click", selectTile);
         document.getElementById("board").appendChild(tile);
     }
 
-    setInterval(setMole, 2000);
+    setInterval(setMole, 1000);
+    setInterval(setPlant, 2000);
 }
 
 function getRandomTile() {
@@ -24,6 +28,10 @@ function getRandomTile() {
 
 function setMole() {
 
+    if (gameOver) {
+        return;
+    }
+
     if (currMoleTile) {
         currMoleTile.innerHTML = "";
     }
@@ -32,6 +40,9 @@ function setMole() {
     mole.src = "./montyMole.png";
 
     let num = getRandomTile();
+    if(currPlantTile && currPlantTile.id == num) {
+        return;
+    }
     currMoleTile = document.getElementById(num);
     currMoleTile.appendChild(mole);
 
@@ -41,10 +52,40 @@ function setMole() {
 
 function setPlant() {
 
+    if (gameOver) {
+        return;
+    }
+
     if (currPlantTile) {
         currPlantTile.innerHTML = "";
     }
 
     let plant =  document.createElement("img");
     plant.src = "./piranhaPlant.png";
-}
+
+    let num = getRandomTile();
+    if(currMoleTile && currMoleTile.id == num) {
+        return;
+    }
+    currPlantTile = document.getElementById(num);
+    currPlantTile.appendChild(plant);
+
+    plant.style.position = "relative";
+    plant.style.top = "-72px";
+    }
+
+    function selectTile() {
+
+        if (gameOver) {
+            return;
+        }
+
+        if (this == currMoleTile) {
+            score += 10;
+            document.getElementById("score").innerText = score.toString();
+        }
+        else if (this == currPlantTile) {
+            document.getElementById("score").innerText = "GAME OVER:" + score.toString();
+            gameOver = true;
+        }
+    }
